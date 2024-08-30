@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Screen of Death</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0078D7; /* Blue background color similar to Windows BSOD */
+            color: #FFFFFF;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 18px; /* Base font size */
+            text-align: left; /* Align text to the left */
+            line-height: 1.6; /* Line height for readability */
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content {
+            position: relative;
+            width: 80%; /* Width to use more space */
+            max-width: 800px; /* Maximum width */
+            padding: 30px; /* Padding */
+            box-sizing: border-box; /* Padding included in width calculation */
+            top: -30px; /* Move slightly more up */
+            left: -150px; /* Move slightly more to the left */
+        }
+        h1 {
+            font-size: 3.5em; /* Header font size */
+            margin: 0;
+            margin-bottom: 20px; /* Spacing below header */
+        }
+        p {
+            margin: 0;
+            margin-bottom: 15px; /* Spacing between paragraphs */
+        }
+            
+        }
+        .progress {
+            font-size: 18px; /* Font size for progress */
+            margin-top: 20px;
+        }
+        .qr-info {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 20px; /* Space between the text and QR code */
+        }
+        .qr-code {
+            width: 80px; /* Adjust the size of the QR code */
+            margin-right: 20px; /* Space between QR code and text */
+        }
+        .error-info {
+            text-align: left;
+            font-size: 16px; /* Font size for error information */
+        }
+    </style>
+</head>
+<body>
+    <div class="content" id="content">
+        <h1>:(</h1>
+        <p>Your PC ran into a problem and needs to restart. We're just collecting some error info, and then we'll restart for you.</p>
+        <p class="progress" id="progress">0% complete</p>
+
+        <div class="qr-info">
+            <img src="https://qr.io/qr-svg/wBtT5Q.svg?1725058802298" alt="QR Code" class="qr-code">
+            <div class="error-info">
+                <p>For more information about this issue and possible fixes, visit https://www.windows.com/stopcode</p>
+                <p>If you call a support person, give them this info:<br>Stop code: CRITICAL_PROCESS_DIED</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getRandomInterval(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function updateProgress() {
+            const progressElement = document.getElementById('progress');
+            let progress = 0;
+
+            function update() {
+                progress += 1; // Increment progress by 1%
+                progressElement.innerHTML = `${progress}% complete`;
+
+                if (progress < 100) {
+                    // Schedule the next update with a random interval
+                    setTimeout(update, getRandomInterval(150, 600));
+                } else {
+                    // Simulate reboot or transition to another screen
+                    setTimeout(() => {
+                        document.body.style.backgroundColor = '#000'; // Change to black background
+                        document.getElementById('content').style.display = 'none'; // Hide content
+                        showRebootScreen();
+                    }, 1000); // Delay before showing the reboot screen
+                }
+            }
+
+            update(); // Start the first update
+        }
+
+        function showRebootScreen() {
+            const rebootScreen = document.createElement('div');
+            rebootScreen.style.display = 'flex';
+            rebootScreen.style.flexDirection = 'column';
+            rebootScreen.style.justifyContent = 'center';
+            rebootScreen.style.alignItems = 'center';
+            rebootScreen.style.height = '100vh';
+            rebootScreen.style.color = '#FFFFFF';
+
+            const logo = document.createElement('img');
+            logo.src = 'https://logodownload.org/wp-content/uploads/2016/03/Windows-10-logo-8.png'; // Image link for Windows logo
+            logo.style.width = '100px';
+            logo.style.marginBottom = '20px';
+            rebootScreen.appendChild(logo);
+
+            const rebootText = document.createElement('h1');
+            rebootText.innerText = 'Preparing Automatic Repair';
+            rebootText.style.fontSize = '20px'; // Font size
+            rebootScreen.appendChild(rebootText);
+
+            document.body.appendChild(rebootScreen);
+        }
+
+        // Start updating the progress when the page loads
+        window.onload = updateProgress;
+    </script>
+</body>
+</html>
