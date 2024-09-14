@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blue Screen of Death</title>
+    <link rel="icon" href="Windows.png" type="image/png">
     <style>
         body {
             margin: 0;
@@ -116,6 +117,7 @@
             logo.src = 'https://logodownload.org/wp-content/uploads/2016/03/Windows-10-logo-8.png'; // Image link for Windows logo
             logo.style.width = '100px';
             logo.style.marginBottom = '20px';
+            logo.style.marginTop = '-100px'; // Adds negative margin to move the logo up
             rebootScreen.appendChild(logo);
 
             const rebootText = document.createElement('h1');
