@@ -39,8 +39,6 @@
             margin: 0;
             margin-bottom: 15px; /* Spacing between paragraphs */
         }
-            
-        }
         .progress {
             font-size: 18px; /* Font size for progress */
             margin-top: 20px;
@@ -92,40 +90,12 @@
                     // Schedule the next update with a random interval
                     setTimeout(update, getRandomInterval(150, 600));
                 } else {
-                    // Simulate reboot or transition to another screen
-                    setTimeout(() => {
-                        document.body.style.backgroundColor = '#000'; // Change to black background
-                        document.getElementById('content').style.display = 'none'; // Hide content
-                        showRebootScreen();
-                    }, 1000); // Delay before showing the reboot screen
+                    // Redirect to a new link when progress reaches 100%
+                    window.location.href = "https://atelloblue.github.io/Windows-10/"; // Replace with your desired URL
                 }
             }
 
             update(); // Start the first update
-        }
-
-        function showRebootScreen() {
-            const rebootScreen = document.createElement('div');
-            rebootScreen.style.display = 'flex';
-            rebootScreen.style.flexDirection = 'column';
-            rebootScreen.style.justifyContent = 'center';
-            rebootScreen.style.alignItems = 'center';
-            rebootScreen.style.height = '100vh';
-            rebootScreen.style.color = '#FFFFFF';
-
-            const logo = document.createElement('img');
-            logo.src = 'https://logodownload.org/wp-content/uploads/2016/03/Windows-10-logo-8.png'; // Image link for Windows logo
-            logo.style.width = '100px';
-            logo.style.marginBottom = '20px';
-            logo.style.marginTop = '-100px'; // Adds negative margin to move the logo up
-            rebootScreen.appendChild(logo);
-
-            const rebootText = document.createElement('h1');
-            rebootText.innerText = 'Preparing Automatic Repair';
-            rebootText.style.fontSize = '20px'; // Font size
-            rebootScreen.appendChild(rebootText);
-
-            document.body.appendChild(rebootScreen);
         }
 
         // Start updating the progress when the page loads
